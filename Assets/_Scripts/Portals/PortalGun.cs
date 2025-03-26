@@ -9,6 +9,8 @@ public class PortalGun : MonoBehaviour
     [SerializeField] private LayerMask rayCastMask;
     [SerializeField] private Camera playerCam;
 
+    [SerializeField] private GameObject portalAPrefab;
+
     void Awake()
     {
         controls = new InputMaster();
@@ -22,6 +24,8 @@ public class PortalGun : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f, rayCastMask))
         {
+            Quaternion rotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
+            Instantiate(portalAPrefab, hit.point, rotation);
             //Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 1f);
             Debug.Log("shot!");
         }
