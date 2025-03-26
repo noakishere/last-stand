@@ -6,24 +6,25 @@ using UnityEngine.InputSystem;
 public class PortalGun : MonoBehaviour
 {
     private InputMaster controls;
+    [SerializeField] private LayerMask rayCastMask;
+    [SerializeField] private Camera playerCam;
 
-    // Start is called before the first frame update
     void Awake()
     {
         controls = new InputMaster();
-        Debug.Log(controls);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void Shoot(InputAction.CallbackContext action)
     {
         Debug.Log(action);
-        Debug.Log("shot!");
+        Ray ray = playerCam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100f, rayCastMask))
+        {
+            //Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 1f);
+            Debug.Log("shot!");
+        }
     }
 
     private void OnEnable()
@@ -35,5 +36,6 @@ public class PortalGun : MonoBehaviour
     private void OnDisable()
     {
         controls.Disable();
+        controls.Player.Shoot.performed -= Shoot;
     }
 }

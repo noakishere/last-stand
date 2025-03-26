@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class MouseLook : MonoBehaviour
 {
     private InputMaster controls;
-    public InputMaster Controls;
 
     [SerializeField] private float mouseSensitivity = 100f;
     private Vector2 mouseLook;
@@ -23,11 +22,6 @@ public class MouseLook : MonoBehaviour
     private void Update()
     {
         Look();
-
-        //if (controls.Player.Shoot.triggered)
-        //{
-        //    Debug.Log("shot!");
-        //}
     }
 
     private void Look()
