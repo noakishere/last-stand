@@ -11,6 +11,10 @@ public class PortalGun : MonoBehaviour
 
     [SerializeField] private GameObject portalAPrefab;
 
+    [SerializeField] private List<GameObject> portals;
+
+    private int portalIndex = 0;
+
     void Awake()
     {
         controls = new InputMaster();
@@ -24,9 +28,41 @@ public class PortalGun : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f, rayCastMask))
         {
+            float threshold = 0.9f;
             Quaternion rotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
-            Instantiate(portalAPrefab, hit.point, rotation);
-            //Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 1f);
+            portals[portalIndex].transform.position = hit.point;
+            portals[portalIndex].transform.rotation = rotation;
+
+            if (Mathf.Abs(Vector3.Dot(hit.normal, Vector3.up)) > threshold)
+            {
+                // Surface is horizontal.
+                // Use the player's forward direction projected onto the horizontal plane
+                Vector3 forward = Vector3.ProjectOnPlane(playerCam.transform.forward, Vector3.up).normalized;
+                if (forward == Vector3.zero)
+                    forward = Vector3.forward; // fallback if projection fails
+
+                // Create a rotation that makes the portal lie flat (facing upward) but oriented based on player's forward
+                rotation = Quaternion.LookRotation(forward, Vector3.up);
+            }
+            //portals[portalIndex].transform.GetChild(1).transform.localRotation = Quaternion.FromToRotation(Vector3.down, hit.normal);
+            portals[portalIndex].transform.GetChild(2).transform.localRotation = rotation;
+
+            if (!portals[portalIndex].activeSelf)
+            {
+                portals[portalIndex].SetActive(true);
+            }
+
+            if(portalIndex == 0)
+            {
+                portalIndex = 1;
+            }
+            else
+            {
+                portalIndex = 0;
+            }
+
+            //Instantiate(portalAPrefab, hit.point, rotation);
+            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 1f);
             Debug.Log("shot!");
         }
     }
