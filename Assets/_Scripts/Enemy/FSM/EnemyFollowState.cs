@@ -5,7 +5,11 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyFollowState : EnemyStateBase
 {
+    public static EnemyFollowState Instance { get; } = new EnemyFollowState();
     private float pathUpdateDeadline;
+
+    public EnemyFollowState() { }
+
     public override void EnterState(EnemyMovementBehaviour state)
     {
         
@@ -21,7 +25,7 @@ public class EnemyFollowState : EnemyStateBase
         }
         else if (distance > enemy.LetGoDistance)
         {
-            enemy.ChangeState(new EnemyIdleState());
+            enemy.ChangeState(EnemyIdleState.Instance);
         }
         else
         {
@@ -30,9 +34,10 @@ public class EnemyFollowState : EnemyStateBase
         }
     }
 
-    public override void ExitState(EnemyMovementBehaviour state)
+    public override void ExitState(EnemyMovementBehaviour enemy)
     {
-        
+        //enemy.ChangeState(EnemyPatrolState.Instance);
+        Debug.Log("Exittt");
     }
 
     public void LookAtTarget(EnemyMovementBehaviour enemy)
@@ -47,7 +52,7 @@ public class EnemyFollowState : EnemyStateBase
     {
         if (Time.time >= pathUpdateDeadline)
         {
-            Debug.Log($"{enemy.gameObject.name}: Updating Path");
+            //Debug.Log($"{enemy.gameObject.name}: Updating Path");
             pathUpdateDeadline = Time.time + enemy.EnemyReferences.PathUpdateDelay;
             enemy.EnemyReferences.NavMeshAgent.SetDestination(enemy.Target.position);
         }

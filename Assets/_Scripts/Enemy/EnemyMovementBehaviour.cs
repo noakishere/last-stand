@@ -39,7 +39,7 @@ public class EnemyMovementBehaviour : MonoBehaviour
         //currentState = Target == null ? new EnemyPatrolState() : new EnemyFollowState();
 
         //ChangeState(currentState);
-        ChangeState(new EnemyIdleState());
+        ChangeState(EnemyIdleState.Instance);
     }
 
     void Update()
@@ -71,7 +71,7 @@ public class EnemyMovementBehaviour : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            ChangeState(new EnemyFollowState());
+            ChangeState(EnemyFollowState.Instance);
         }
     }
 }

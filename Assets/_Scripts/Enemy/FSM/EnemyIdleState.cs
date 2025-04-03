@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class EnemyIdleState : EnemyStateBase
 {
+    public static EnemyIdleState Instance { get; } = new EnemyIdleState();
     private float idleTimer;
     private const float idleDuration = 5f; // wait 5 seconds
+
+    public EnemyIdleState() { }
 
     public override void EnterState(EnemyMovementBehaviour state)
     {
@@ -21,7 +24,7 @@ public class EnemyIdleState : EnemyStateBase
             idleTimer += Time.deltaTime;
             if (idleTimer >= idleDuration)
             {
-                enemy.ChangeState(new EnemyPatrolState());
+                enemy.ChangeState(EnemyPatrolState.Instance);
             }
         }
     }

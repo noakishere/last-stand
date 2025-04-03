@@ -6,7 +6,11 @@ using UnityEngine.AI;
 
 public class EnemyPatrolState : EnemyStateBase
 {
+    public static EnemyPatrolState Instance { get; } = new EnemyPatrolState();
     private Vector3 patrolDestination;
+
+    public EnemyPatrolState() { }
+
     public override void EnterState(EnemyMovementBehaviour enemy)
     {
         Debug.Log($"{enemy.gameObject.name} entered Patrol state");
@@ -18,7 +22,7 @@ public class EnemyPatrolState : EnemyStateBase
         if (!enemy.EnemyReferences.NavMeshAgent.pathPending &&
             enemy.EnemyReferences.NavMeshAgent.remainingDistance <= enemy.EnemyReferences.NavMeshAgent.stoppingDistance)
         {
-            enemy.ChangeState(new EnemyIdleState());
+            enemy.ChangeState(EnemyIdleState.Instance);
         }
     }
 
