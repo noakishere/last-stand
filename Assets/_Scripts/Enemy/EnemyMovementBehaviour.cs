@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyMovementBehaviour : MonoBehaviour
 {
     private EnemyReferences enemyReferences;
+    public EnemyReferences EnemyReferences => enemyReferences;
+
     [SerializeField] private Transform target;
     public Transform Target => target;
     private float attackDistance;
@@ -13,12 +16,19 @@ public class EnemyMovementBehaviour : MonoBehaviour
     private float letGoDistance;
     public float LetGoDistance => letGoDistance;
 
-    private float pathUpdateDeadline;
-
     [SerializeField] private EnemyStateBase currentState;
+
+    [Header("Patrol Settings")]
+    [SerializeField] private bool doesPatrol;
+    public bool DoesPatrol => doesPatrol;
+    public float PatrolRange = 10f;
+    public Vector3 PatrolCenter { get; private set; }
+
     private void Awake()
     {
         enemyReferences = GetComponent<EnemyReferences>();
+
+        PatrolCenter = transform.position;
     }
 
     void Start()
@@ -26,6 +36,9 @@ public class EnemyMovementBehaviour : MonoBehaviour
         attackDistance = enemyReferences.NavMeshAgent.stoppingDistance;
         letGoDistance = Settings.EnemyLetGoDistance;
 
+        //currentState = Target == null ? new EnemyPatrolState() : new EnemyFollowState();
+
+        //ChangeState(currentState);
         ChangeState(new EnemyIdleState());
     }
 
@@ -42,29 +55,16 @@ public class EnemyMovementBehaviour : MonoBehaviour
         }
         currentState = newState;
         currentState.EnterState(this);
-    }
-
-    public void LookAtTarget()
-    {
-        Vector3 lookPos = target.position - transform.position;
-        lookPos.y = 0;
-        Quaternion rotation = Quaternion.LookRotation(lookPos);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.2f);
-    }
-
-    public void UpdatePath()
-    {
-        if (Time.time >= pathUpdateDeadline)
-        {
-            Debug.Log($"{gameObject.name}: Updating Path");
-            pathUpdateDeadline = Time.time + enemyReferences.PathUpdateDelay;
-            enemyReferences.NavMeshAgent.SetDestination(target.position);
-        }
-    }
+    }   
 
     public void StopMovement()
     {
         enemyReferences.NavMeshAgent.SetDestination(transform.position);
+    }
+
+    public void SetTarget(NavMeshHit hit)
+    {
+        enemyReferences.NavMeshAgent.SetDestination(hit.position);
     }
 
     private void OnTriggerEnter(Collider other)

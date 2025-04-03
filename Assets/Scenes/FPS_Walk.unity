@@ -1868,6 +1868,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1282670025}
+  doesPatrol: 0
+  PatrolRange: 10
 --- !u!114 &1653186447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2378,7 +2380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896557277350904435, guid: 6c4d9042285a8c74bb8de332cb207dc5, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7896557277350904435, guid: 6c4d9042285a8c74bb8de332cb207dc5, type: 3}
       propertyPath: _DitheringScale
@@ -2390,7 +2392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8706260062068844782, guid: 6c4d9042285a8c74bb8de332cb207dc5, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9069791106106836979, guid: 6c4d9042285a8c74bb8de332cb207dc5, type: 3}
       propertyPath: m_Name
@@ -2603,6 +2605,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1282670025}
+    - target: {fileID: 313115919702531799, guid: c44a5d32925caea42a3668c686888003, type: 3}
+      propertyPath: doesPatrol
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5135053458254196101, guid: c44a5d32925caea42a3668c686888003, type: 3}
       propertyPath: m_Name
       value: EnemySample
