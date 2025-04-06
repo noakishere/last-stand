@@ -36,7 +36,6 @@ public class EnemyFollowState : EnemyStateBase
 
     public override void ExitState(EnemyMovementBehaviour enemy)
     {
-        //enemy.ChangeState(EnemyPatrolState.Instance);
         Debug.Log("Exittt");
     }
 
