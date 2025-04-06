@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2498909170779889183}
   - component: {fileID: 4973696655030866291}
   - component: {fileID: 313115919702531799}
+  - component: {fileID: 2938260840669395724}
   m_Layer: 0
   m_Name: EnemySample
   m_TagString: Untagged
@@ -157,3 +158,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  doesPatrol: 1
+  PatrolRange: 10
+--- !u!65 &2938260840669395724
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5135053458254196101}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.9142284, y: 2.0090442, z: 3.6970057}
+  m_Center: {x: -0.041243672, y: 1.0024984, z: 1.6838102}
