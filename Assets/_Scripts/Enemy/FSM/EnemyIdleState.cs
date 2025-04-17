@@ -14,7 +14,7 @@ public class EnemyIdleState : EnemyStateBase
     {
         idleTimer = 0f;
         state.StopMovement();
-        Debug.Log($"{state.gameObject.name} entered Idle state");
+        //Debug.Log($"{state.gameObject.name} entered Idle state");
     }
 
     public override void ExecuteState(EnemyMovementBehaviour enemy)

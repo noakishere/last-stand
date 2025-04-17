@@ -69,7 +69,7 @@ public class PortalCamera : MonoBehaviour
         // Use portal's up vector for proper alignment.
         transform.rotation = Quaternion.LookRotation(newCameraDirection, portal.up);
 
-        Debug.Log("Angle of Incidence: " + Vector3.Angle(playerDirection, portalNormal));
+        //Debug.Log("Angle of Incidence: " + Vector3.Angle(playerDirection, portalNormal));
     }
 
 }

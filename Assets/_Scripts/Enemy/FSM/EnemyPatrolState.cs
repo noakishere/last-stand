@@ -40,7 +40,7 @@ public class EnemyPatrolState : EnemyStateBase
         if (NavMesh.SamplePosition(patrolDestination, out navHit, enemy.PatrolRange, NavMesh.AllAreas))
         {
             enemy.SetTarget(navHit);
-            Debug.Log($"{enemy.name} patrol destination set to {navHit.position}");
+            //Debug.Log($"{enemy.name} patrol destination set to {navHit.position}");
         }
     }
 }

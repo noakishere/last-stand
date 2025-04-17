@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
     }
 
-    void Update()
+    void LateUpdate()
     {
         Gravity();
         PlayerMovement();
@@ -37,15 +37,38 @@ public class PlayerController : MonoBehaviour
 
     private void Gravity()
     {
-        isGrounded = Physics.CheckSphere(ground.position, distanceToGround, groundMask);
-
-        if(isGrounded && velocity.y < 0)
+        // shoot a short ray straight down from the player's feet
+        RaycastHit hit;
+        float rayLength = distanceToGround + 0.1f;
+        if (Physics.Raycast(ground.position, Vector3.down, out hit, rayLength, groundMask))
         {
-            velocity.y = -2f;
+            // only consider yourself grounded if that surface is mostly horizontal
+            float angle = Vector3.Angle(hit.normal, Vector3.up);
+            isGrounded = angle < 60f;     // e.g. only surfaces within 60° of horizontal
+        }
+        else
+        {
+            isGrounded = false;
         }
 
+        //if (isGrounded && velocity.y < 0f)
+        //{
+        //    velocity.y = -2f;  // a small downward tug to stay snapped
+        //}
+
+        // apply gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        //isGrounded = Physics.CheckSphere(ground.position, distanceToGround, groundMask);
+
+        //if(isGrounded && velocity.y < 0)
+        //{
+        //    velocity.y = -2f;
+        //}
+
+        //velocity.y += gravity * Time.deltaTime;
+        //controller.Move(velocity * Time.deltaTime);
     }
 
     private void PlayerMovement()

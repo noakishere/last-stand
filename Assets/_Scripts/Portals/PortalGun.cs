@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.HID;
+using UnityEngine.UI;
 
 public class PortalGun : MonoBehaviour
 {
@@ -13,6 +15,10 @@ public class PortalGun : MonoBehaviour
 
     [SerializeField] private List<GameObject> portals;
 
+    [SerializeField] private float maxRaycastDist;
+
+    [SerializeField] private Image uiImg;
+
     private int portalIndex = 0;
 
     void Awake()
@@ -20,13 +26,27 @@ public class PortalGun : MonoBehaviour
         controls = new InputMaster();
     }
 
+    private void Update()
+    {
+        Ray ray = playerCam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, maxRaycastDist, rayCastMask))
+        {
+            uiImg.color = Color.green;
+        }
+        else
+        {
+            uiImg.color = Color.red;
+        }
+    }
+
     private void Shoot(InputAction.CallbackContext action)
     {
-        Debug.Log(action);
+        //Debug.Log(action);
         Ray ray = playerCam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100f, rayCastMask))
+        if (Physics.Raycast(ray, out hit, maxRaycastDist, rayCastMask))
         {
             float threshold = 0.9f;
             Quaternion rotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
@@ -63,7 +83,7 @@ public class PortalGun : MonoBehaviour
 
             //Instantiate(portalAPrefab, hit.point, rotation);
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 1f);
-            Debug.Log("shot!");
+            //Debug.Log("shot!");
         }
     }
 
