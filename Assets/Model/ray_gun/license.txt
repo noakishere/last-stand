@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ray Gun
+* source:	https://sketchfab.com/3d-models/ray-gun-b2a8440d99a64a97997c8fd0d295e026
+* author:	Jonathan Brown (https://sketchfab.com/Junders_Plunkett)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ray Gun" (https://sketchfab.com/3d-models/ray-gun-b2a8440d99a64a97997c8fd0d295e026) by Jonathan Brown (https://sketchfab.com/Junders_Plunkett) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
