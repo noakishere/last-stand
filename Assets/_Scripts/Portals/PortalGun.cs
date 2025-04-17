@@ -21,6 +21,8 @@ public class PortalGun : MonoBehaviour
 
     private int portalIndex = 0;
 
+    [SerializeField] private AudioClip instanceSFX;
+
     void Awake()
     {
         controls = new InputMaster();
@@ -65,6 +67,8 @@ public class PortalGun : MonoBehaviour
                 rotation = Quaternion.LookRotation(forward, Vector3.up);
             }
             //portals[portalIndex].transform.GetChild(1).transform.localRotation = Quaternion.FromToRotation(Vector3.down, hit.normal);
+            float randomSFXPitch = Random.Range(1f, 3f);
+            SoundManager.Instance.PlayEffectAudio(instanceSFX, randomSFXPitch);
             portals[portalIndex].transform.GetChild(2).transform.localRotation = rotation;
 
             if (!portals[portalIndex].activeSelf)
