@@ -19,6 +19,8 @@ namespace PSXShaderKit
         [SerializeField]
         private AudioClip clip;
 
+        [SerializeField] private bool doesItEnd;
+
 
         private void Start()
         {
@@ -45,8 +47,17 @@ namespace PSXShaderKit
             {
                 SoundManager.Instance.PlayEffectAudio(clip);
             }
+
+            if (doesItEnd)
+            {
+                StartCoroutine(End());
+            }
+
+            else
+            {
+                Destroy(gameObject);
+            }
             
-            Destroy(gameObject);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -55,6 +66,13 @@ namespace PSXShaderKit
             {
                 Interact();
             }
+        }
+
+        private IEnumerator End()
+        {
+            yield return new WaitForSeconds(10f);
+
+            SceneBehaviour.Instance.MainMenu();
         }
     }
 }

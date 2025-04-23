@@ -13,7 +13,7 @@ public class EnemyPatrolState : EnemyStateBase
 
     public override void EnterState(EnemyMovementBehaviour enemy)
     {
-        Debug.Log($"{enemy.gameObject.name} entered Patrol state");
+        //Debug.Log($"{enemy.gameObject.name} entered Patrol state");
         SetNewDestination(enemy);
     }
 

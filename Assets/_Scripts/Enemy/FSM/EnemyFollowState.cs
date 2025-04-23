@@ -21,7 +21,7 @@ public class EnemyFollowState : EnemyStateBase
         if (distance <= enemy.AttackDistance)
         {
             //state.ChangeState(new EnemyAttackState());
-            Debug.Log($"{enemy.gameObject.name}: Attack!!");
+            //Debug.Log($"{enemy.gameObject.name}: Attack!!");
         }
         else if (distance > enemy.LetGoDistance)
         {
@@ -36,7 +36,7 @@ public class EnemyFollowState : EnemyStateBase
 
     public override void ExitState(EnemyMovementBehaviour enemy)
     {
-        Debug.Log("Exittt");
+        //Debug.Log("Exittt");
     }
 
     public void LookAtTarget(EnemyMovementBehaviour enemy)
